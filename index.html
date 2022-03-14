@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<!--Author: Alane Suhr for NLVR 2018; Adapted by Ziwei Qin for PMR 2022 -->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Premise-based Multimodal Reasoning</title>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PKU for Visual Reasoning Dataset">
+    <meta name="twitter:description" content="The Natural Language for Visual Reasoning corpora use the task of determining whether a sentence is true about a visual input, like an image. This task focuses on reasoning about sets of objects, comparisons, and spatial relations. This includes two datasets: NLVR, with synthetically generated images, and NLVR2, which includes natural photographs.">
+    <meta name="twitter:image" content="http://lic.nlp.cornell.edu/nlvr/img/preview1.jpg">
+    <meta name="description" content="The Natural Language for Visual Reasoning corpora use the task of determining whether a sentence is true about a visual input, like an image. This task focuses on reasoning about sets of objects, comparisons, and spatial relations. This includes two datasets: NLVR, with synthetically generated images, and NLVR2, which includes natural photographs.">
+    <meta property="og:url" content="http://lic.nlp.cornell.edu/nlvr/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Cornell Natural Language for Visual Reasoning Dataset" />
+    <meta property="og:description" content="The Natural Language for Visual Reasoning corpora use the task of determining whether a sentence is true about a visual input, like an image. This task focuses on reasoning about sets of objects, comparisons, and spatial relations. This includes two datasets: NLVR, with synthetically generated images, and NLVR2, which includes natural photographs."
+    />
+    <meta property="og:image" content="http://lic.nlp.cornell.edu/nlvr/img/preview1.jpg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta property="og:image" content="logo.png">
+    <link rel="image_src" type="image/png" href="logo.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/theme.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/svg.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" id="topNavbar" role="navigation">
+        <div class="container clearfix" id="navContainer">
+            <div class="rightNav">
+                <div class="collapseDiv">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="pmr.html">Explore PMR</a>
+                        </li>
+                        <!--          <li>
+            <a href="explore/v2.0/dev/">Explore 2.0</a>
+          </li>
+          <li>
+            <a href="explore/1.1/dev/">Explore 1.1</a>
+          </li>
+-->
+                    </ul>
+                </div>
+            </div>
+            <div class="leftNav">
+                <div class="brandDiv">
+                    <a class="navbar-brand" href="index.html">PMR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cover" id="topCover">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+					<h1 id="appTitle">PMR</h1>
+                </div>
+            </div>
+            </center>
+            <script>
+                function draw_svgs(div_name) {
+                    var x_dim = 100;
+                    var y_dim = 100;
+                    var draw = SVG(div_name).size(x_dim, y_dim);
+
+                    var num_shapes = Math.floor(Math.random() * 3) + 1;
+                    for (var i = 0; i < num_shapes; i++) {
+                        var shape = Math.floor(Math.random() * 3);
+                        var color = Math.floor(Math.random() * 3);
+                        var size = (Math.floor(Math.random() * 3) + 1) * 10 + 10;
+
+                        var color_string;
+                        if (color == 0) {
+                            color_string = "black";
+                        } else if (color == 1) {
+                            color_string = "#1a9bfc";
+                        } else {
+                            color_string = "#fffd38";
+                        }
+
+                        if (shape == 0) {
+                            var center_x = Math.floor(Math.random() * (x_dim - size));
+                            var center_y = Math.floor(Math.random() * (y_dim - size));
+
+                            var circle = draw.circle(size).move(center_x, center_y).attr({
+                                fill: color_string
+                            });
+                        } else if (shape == 1) {
+                            var max_start_x = x_dim - size;
+                            var max_start_y = y_dim - size;
+
+                            var start_x = Math.floor(Math.random() * max_start_x);
+                            var start_y = Math.floor(Math.random() * max_start_y);
+
+                            var rect = draw.rect(size, size).move(start_x, start_y).attr({
+                                fill: color_string
+                            });
+                        } else {
+                            var max_start_x = x_dim - size * 2;
+                            var max_start_y = y_dim - size * 2;
+
+                            var start_x = Math.floor(Math.random() * max_start_x) + size;
+                            var start_y = Math.floor(Math.random() * max_start_y) + size;
+
+                            var polygon = draw.polygon(start_x.toString() + ',' + start_y.toString() + ' ' + (start_x + size).toString() + ',' + start_y.toString() + ' ' + (start_x + size / 2).toString() + ',' + (start_y - size).toString()).fill(color_string);
+                        }
+                    }
+                }
+
+                draw_svgs('leftShapes');
+                draw_svgs('rightShapes');
+            </script>
+            <h2 id="appSubtitle">Premise-based Multimodal Reasoning</h2>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="cover" id="contentCover">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="infoCard">
+                        <div class="infoBody">
+                            <div class="infoHeadline">
+                                <h2>Cornell Natural Language for Visual Reasoning</h2>
+                            </div>
+                            <p>
+                                The Natural Language for Visual Reasoning corpora are two language grounding datasets containing natural language sentences grounded in images. The task is to determine whether a sentence is true about a visual input. The data was collected through crowdsourcings,
+                                and solving the task requires reasoning about sets of objects, comparisons, and spatial relations. This includes two corpora: NLVR, with synthetically generated images, and NLVR2, which includes natural photographs.
+                            </p>
+                            <hr>
+                            <div class="infoHeadline">
+                                <h2>Natural Language for Visual Reasoning <i>for Real</i></h2>
+                            </div>
+                            <p>
+                                <b>NLVR2</b> contains 107,292 examples of human-written English sentences grounded in pairs of photographs. NLVR2 retains the linguistic diversity of NLVR, while including much more visually complex images.
+                            </p> <br/>
+                            <center>
+                                <a class="btn btn-default" href="https://github.com/clic-lab/nlvr/tree/master/nlvr2"><b>Data</b></a>
+                                <a class="btn btn-default" href="https://arxiv.org/abs/1811.00491"><b>Paper (Suhr et al. 2019)</b></a><br /><br />
+                                <button class="btn btn-default" data-toggle="collapse" data-target="#nlvr2_examples"><b>Show Examples from NLVR2</b></button>
+                                <div id="nlvr2_examples" class="collapse"><br />
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <img src="exs/ex0_0.jpg" style="border: #000000 1px outset; height: 100px;" /> <img src="exs/ex0_1.jpg" style="border: #000000 1px outset; height: 100px;" />
+
+                                        </div>
+                                        <center>The left image contains twice the number of dogs as the right image, and at least two dogs in total are standing.<br />
+                                            <span class="label label-success">true</span>
+                                        </center>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <img src="exs/acorns_1.jpg" style="border: #000000 1px outset; width: 150px;" /> <img src="exs/acorns_6.jpg" style="border: #000000 1px outset; width: 150px;" />
+
+                                        </div>
+                                        <center>One image shows exactly two brown acorns in back-to-back caps on green foliage.
+                                            <br /><span class="label label-danger">false</span><br /><br /></center>
+                                        <b>Image Credit</b> (in order left-right, top-bottom): MemoryCatcher (CC0), Calabash13 (CC BY-SA 3.0), Charles Rondeau (CC0), Andale (CC0).
+                                    </div><br />
+                            </center>
+                            <br />
+                            <p>We only publicly release the sentence annotations and original image URLs, and scripts that download the images from the URLs. If you would like direct access to the images, please fill out this <a href="https://goo.gl/forms/yS29stWnFWzrDBFH3">Google Form</a>.
+                                This form asks for your basic information and asks you to agree to our Terms of Service.</p>
+                            <hr>
+                            <div class="infoHeadline">
+                                <h2>Natural Language for Visual Reasoning</h2>
+                            </div>
+                            <p>
+                                <b>NLVR</b> contains 92,244 pairs of human-written English sentences grounded in synthetic images. Because the images are synthically generated, this dataset can be used for semantic parsing.
+                            </p> <br/>
+                            <center>
+                                <a class="btn btn-default" href="https://github.com/clic-lab/nlvr/tree/master/nlvr"><b>Data</b></a>
+                                <a class="btn btn-default" href="https://yoavartzi.com/pub/slya-acl.2017.pdf"><b>Paper (Suhr et al. 2017)</b></a> <br /><br />
+                                <button class="btn btn-default" data-toggle="collapse" data-target="#nlvr_examples"><b>Show Examples from NLVR</b></button>
+                                <div id="nlvr_examples" class="collapse"><br />
+                                    <center>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <img src="exs/ex0.png" style="border: #000000 1px outset; width: 350px;" />
+                                            </div>
+                                            <center>There is exactly one black triangle not touching any edge<br />
+                                                <span class="label label-success">true</span>
+                                            </center>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <img src="exs/sup_ex4.png" style="border: #000000 1px outset; width: 350px;" />
+                                            </div>
+                                            <center>there is at least one tower with four blocks with a yellow block at the base and a blue block below the top block<br /><span class="label label-success">true</span>
+                                                <center>
+                                        </div>
+
+                                        <br />
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <img src="exs/sup_ex6.png" style="border: #000000 1px outset; width: 350px;" />
+                                            </div>
+                                            <center>There is a box with multiple items and only one item has a different color.
+                                                <br /><span class="label label-danger">false</span>
+                                            </center>
+                                        </div>
+
+                                        <br />
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <img src="exs/sup_ex10.png" style="border: #000000 1px outset; width: 350px;" />
+                                            </div>
+                                            <center>There is exactly one tower with a blue block at the base and yellow block at the top</br><span class="label label-danger">false</span></center>
+                                        </div>
+
+                                        <br />
+
+                                        <p>More examples (from the development set) are available <a href="examples.html">here</a>.</p>
+
+                                        <br />
+
+                                        </center>
+                                </div>
+                                </center>
+                                <hr>
+                                <div class="infoHeadline">
+                                    <h2>Leaderboards</h2>
+                                </div>
+                                <p>
+                                    Both NLVR and NLVR2 are split into training, development, and two test sets. One test set is public (Test-P) and available with the data, and the other is not released (Test-U). We maintain a leaderboard displaying accuracy and consistency on the unreleased
+                                    test set (as well as accuracy on the development and public test sets). Results are ordered by accuracy on the unreleased test set; ties are broken with consistency.
+                                </p><br/>
+                                <p>
+                                    We require <b>two months or more</b> between runs on each leaderboard test set. We will do our best to run within two weeks (usually we will run much faster). We will only post results on the leaderboard when an online
+                                    description of the system is available. Testing on the leaderboard test set is meant to be the final step before publication. Under extreme circumstances, we reserve the right to limit running on the leaderboard test
+                                    set to systems that are mature for publication. Your model should generate a prediction file in the format specified in the NLVR readme and run with the provided evaluation scripts. You can request to add your model
+                                    to the leaderboard even if you don't evaluate on the unreleased test set.
+                                </p><br />
+                                <p>
+                                    For both datasets, we use two evaluation metrics: <i>accuracy</i> and <i>consistency</i>. Accuracy (Acc) is computed as the proportion of examples (sentence-image pairs) for which a model correctly predicted a truth
+                                    value. Consistency (Cons) measures the generalization of a model. It is computed as the proportion of unique sentences for which a model correctly predicted the truth value <i>for all paired images</i> <a href="https://arxiv.org/abs/1711.05240">(Goldman et al., 2018)</a>.
+                                </p><br />
+                                <hr>
+                                <div class="infoHeadline">
+                                    <h2>Questions?</h2>
+                                </div>
+                                <p>
+                                    Please visit our <a href="https://github.com/clic-lab/nlvr/issues">Github issues page</a> or email us at
+                                    <center> nlvr
+                                        < at> googlegroups.com </center>
+                                </p>
+                                <p>Please email us if you wish to run on an unreleased test set. To keep up to date with major changes, please subscribe:</p><br />
+                                <!-- Begin MailChimp Signup Form -->
+                                <div id="mc_embed_signup">
+                                    <form action="//cornell.us16.list-manage.com/subscribe/post?u=277cae703143a6cfcb4d547ed&amp;id=652b330f60" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form-inline" target="_blank" novalidate>
+                                        <div id="mc_embed_signup_scroll">
+                                            <div class="mc-field-group form-group">
+                                                <input type="email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" placeholder="email address">
+                                            </div>
+                                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                                <input type="text" name="b_277cae703143a6cfcb4d547ed_652b330f60" tabindex="-1" value="">
+                                            </div>
+                                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">
+                                        </div>
+                                    </form>
+                                </div>
+                                <hr/>
+                                <div class="infoHeadline">
+                                    <h2>Acknowledgments</h2>
+                                </div>
+                                <p>
+                                    This research was supported by the NSF (CRII-1656998), a Facebook ParlAI Research Award, an AI2 Key Scientific Challenges Award, Amazon Cloud Credits Grant, and support from Women in Technology New York. This material is based on work supported by the
+                                    National Science Foundation Graduate Research Fellowship under Grant No. DGE-1650441. We thank Mark Yatskar and Noah Snavely for their comments and suggestions, and the workers who participated in our data collection
+                                    for their contributions.</p><br />
+                                <p>Also thanks to <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a> for allowing us to use their code to create this website!</p>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="infoCard">
+                            <div class="infoBody">
+                                <div class="infoHeadline">
+                                    <h2>NLVR2 Leaderboard</h2>
+                                </div>
+                                <p>
+                                    NLVR2 presents the task of determining whether a natural language sentence is true about a pair of photographs.
+                                </p>
+                                <table class="table performanceTable">
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Model</th>
+                                        <th>Dev. (Acc)</th>
+                                        <th>Test-P (Acc)</th>
+                                        <th>Test-U (Acc)</th>
+                                        <th>Test-U (Cons)</th>
+                                    </tr>
+                                    <tr class="human-row">
+                                        <td></td>
+                                        <td>Human Performance
+                                            <p class="institution">Cornell University</p><a href="https://arxiv.org/abs/1811.00491">(Suhr et al. 2019)</a></td>
+                                        <td>96.2</td>
+                                        <td>96.3</td>
+                                        <td>96.1</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>1</p><span class="date label label-default">Oct 14, 2019</span></td>
+                                        <td style="word-break:break-word;">UNITER
+                                            <p class="institution">Microsoft Dynamics 365 AI Research</p><a href="https://arxiv.org/abs/1909.11740">(Chen et al. 2019)</a></td>
+                                        <td><b>78.4</b></td>
+                                        <td><b>79.5</b></td>
+                                        <td><b>80.4</b></td>
+                                        <td><b>50.8</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>2</p><span class="date label label-default">Aug 20, 2019</span></td>
+                                        <td style="word-break:break-word;">LXMERT
+                                            <p class="institution">UNC Chapel Hill</p><a href="https://arxiv.org/abs/1908.07490">(Tan and Bansal 2019)</a></td>
+                                        <td>74.9</td>
+                                        <td>74.5</td>
+                                        <td>76.2</td>
+                                        <td>42.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>3</p><span class="date label label-default">Aug 11, 2019</span></td>
+                                        <td style="word-break:break-word;">VisualBERT
+                                            <p class="institution">UCLA & AI2 & PKU</p><a href="https://arxiv.org/abs/1908.03557">(Li et al. 2019)</a></td>
+                                        <td>67.4</td>
+                                        <td>67.0</td>
+                                        <td>67.3</td>
+                                        <td>26.9</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>4</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">MaxEnt
+                                            <p class="institution">Cornell University</p><a href="https://arxiv.org/abs/1811.00491">(Suhr et al. 2019)</a></td>
+                                        <td>54.1</td>
+                                        <td>54.8</td>
+                                        <td>53.5</td>
+                                        <td>12.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>5</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">CNN+RNN
+                                            <p class="institution">Cornell University</p><a href="https://arxiv.org/abs/1811.00491">(Suhr et al. 2019)</a></td>
+                                        <td>53.4</td>
+                                        <td>52.4</td>
+                                        <td>53.2</td>
+                                        <td>11.2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>6</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">FiLM
+                                            <p class="institution">MILA, ran by Cornell University</p><a href="https://arxiv.org/pdf/1709.07871.pdf">(Perez et al. 2018)</a></td>
+                                        <td>51.0</td>
+                                        <td>52.1</td>
+                                        <td>53.0</td>
+                                        <td>10.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>7</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">Image Only (CNN)
+                                            <p class="institution">Cornell University</p><a href="https://arxiv.org/abs/1811.00491">(Suhr et al. 2019)</a></td>
+                                        <td>51.6</td>
+                                        <td>51.9</td>
+                                        <td>51.9</td>
+                                        <td>7.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>8</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">N2NMN, policy search from scratch
+                                            <p class="institution">UC Berkeley, ran by Cornell University</p><a href="https://arxiv.org/pdf/1704.05526.pdf">(Hu et al. 2017)</a></td>
+                                        <td>51.0</td>
+                                        <td>51.1</td>
+                                        <td>51.5</td>
+                                        <td>5.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>9</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">Majority Class
+                                            <p class="institution">Cornell University</p><a href="https://arxiv.org/abs/1811.00491">(Suhr et al. 2019)</a></td>
+                                        <td>50.9</td>
+                                        <td>51.1</td>
+                                        <td>51.4</td>
+                                        <td>4.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>10</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">Text Only (RNN)
+                                            <p class="institution">Cornell University</p><a href="https://arxiv.org/abs/1811.00491">(Suhr et al. 2019)</a></td>
+                                        <td>50.9</td>
+                                        <td>51.1</td>
+                                        <td>51.4</td>
+                                        <td>4.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>11</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">MAC-Network
+                                            <p class="institution">Stanford University, ran by Cornell University</p><a href="https://arxiv.org/abs/1803.03067">(Hudson and Manning 2018)</a></td>
+                                        <td>50.8</td>
+                                        <td>51.4</td>
+                                        <td>51.2</td>
+                                        <td>11.2</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="infoCard">
+                            <div class="infoBody">
+                                <div class="infoHeadline">
+                                    <h2>NLVR Leaderboard</h2>
+                                </div>
+                                <p>
+                                    NLVR presents the task of determining whether a natural language sentence is true about a synthetically generated image. We divide results into whether they process the image pixels directly (Images) or whether they use the structured representations
+                                    of the images (Structured Representations).
+                                </p>
+                                <div class="infoHeadline">
+                                    <h2>Images</h2>
+                                </div>
+                                <table class="table performanceTable">
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Model</th>
+                                        <th>Dev. (Acc)</th>
+                                        <th>Test-P (Acc)</th>
+                                        <th>Test-U (Acc)</th>
+                                        <th>Test-U (Cons)</th>
+                                    </tr>
+                                    <tr class="human-row">
+                                        <td></td>
+                                        <td>Human Performance
+                                            <p class="institution">Cornell University</p>
+                                        </td>
+                                        <td>94.6</td>
+                                        <td>95.4</td>
+                                        <td>94.9</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>1</p><span class="date label label-default">Apr 20, 2018</span></td>
+                                        <td style="word-break:break-word;">CNN-BiATT
+                                            <p class="institution">UNC Chapel Hill</p><a href="https://arxiv.org/pdf/1804.06870.pdf">(Tan and Bansal 2018)</a></td>
+                                        <td><b>66.9</b></td>
+                                        <td><b>69.7</b></td>
+                                        <td><b>66.1</b></td>
+                                        <td><b>28.9</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>2</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">N2NMN, policy search from scratch
+                                            <p class="institution">UC Berkeley, ran by Cornell University</p><a href="https://arxiv.org/pdf/1704.05526.pdf">(Hu et al. 2017)</a></td>
+                                        <td>65.3</td>
+                                        <td>69.1</td>
+                                        <td>66.0</td>
+                                        <td>17.7</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>3</p><span class="date label label-default">Apr 22, 2017</span></td>
+                                        <td style="word-break:break-word;">Neural Module Networks
+                                            <p class="institution">UC Berkeley, ran by Cornell University</p><a href="https://arxiv.org/pdf/1511.02799.pdf">(Andreas et al. 2016)</a></td>
+                                        <td>63.1</td>
+                                        <td>66.1</td>
+                                        <td>62.0</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>4</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">FiLM
+                                            <p class="institution">MILA, ran by Cornell University</p><a href="https://arxiv.org/pdf/1709.07871.pdf">(Perez et al. 2018)</a></td>
+                                        <td>60.1</td>
+                                        <td>62.2</td>
+                                        <td>61.2</td>
+                                        <td>18.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>5</p><span class="date label label-default">Apr 22, 2017</span></td>
+                                        <td style="word-break:break-word;">Majority Class
+                                            <p class="institution">Cornell University</p><a href="http://alanesuhr.com/suhr2017.pdf">(Suhr et al. 2017)</a></td>
+                                        <td>55.3</td>
+                                        <td>56.2</td>
+                                        <td>55.4</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>6</p><span class="date label label-default">Nov 1, 2018</span></td>
+                                        <td style="word-break:break-word;">MAC-Network
+                                            <p class="institution">Stanford University, ran by Cornell University</p><a href="https://arxiv.org/abs/1803.03067">(Hudson and Manning 2018)</a></td>
+                                        <td>55.4</td>
+                                        <td>57.6</td>
+                                        <td>54.3</td>
+                                        <td>8.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Unranked</p><span class="date label label-default">Sept 7, 2018</span></td>
+                                        <td style="word-break:break-word;">CMM
+                                            <p class="institution">Chinese Academy of Sciences</p><a href="http://aclweb.org/anthology/D18-1118">(Yao et al. 2018)</a></td>
+                                        <td>68.0</td>
+                                        <td>69.9</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Unranked</p><span class="date label label-default">May 23, 2018</span></td>
+                                        <td style="word-break:break-word;">W-MemNN
+                                            <p class="institution">Federico Santa María Technical University & Pontífica Universidad Católica de Valparaíso</p><a href="https://arxiv.org/pdf/1805.09354.pdf">(Pavez et al. 2018)</a></td>
+                                        <td>65.6</td>
+                                        <td>65.8</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+
+                                </table>
+
+                                <div class="infoHeadline">
+                                    <h2>Structured Representations</h2>
+                                </div>
+                                <table class="table performanceTable">
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Model</th>
+                                        <th>Dev. (Acc)</th>
+                                        <th>Test-P (Acc)</th>
+                                        <th>Test-U (Acc)</th>
+                                        <th>Test-U (Cons)</th>
+                                    </tr>
+                                    <tr class="human-row">
+                                        <td></td>
+                                        <td>Human Performance
+                                            <p class="institution">Cornell University</p>
+                                        </td>
+                                        <td>94.6</td>
+                                        <td>95.4</td>
+                                        <td>94.9</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>1</p><span class="date label label-default">July 14, 2021</span></td>
+                                        <td style="word-break:break-word;">Consistency-based Parser
+                                            <p class="institution">UPenn; UC Irvine; AI2</p><a href="https://arxiv.org/abs/2107.05833">(Gupta et al. 2021)</a></td>
+                                        <td><b>89.6</b></td>
+                                        <td><b>86.3</b></td>
+                                        <td><b>89.5</b></td>
+                                        <td><b>74.0</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>2</p><span class="date label label-default">June 2, 2019</span></td>
+                                        <td style="word-break:break-word;">Iterative Search
+                                            <p class="institution">AI2; Mila; UW; CMU</p><a href="https://www.aclweb.org/anthology/N19-1273.pdf">(Dasigi et al. 2019)</a></td>
+                                        <td>85.4</td>
+                                        <td>82.4</td>
+                                        <td>82.9</td>
+                                        <td>64.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>3</p><span class="date label label-default">Nov 14, 2017</span></td>
+                                        <td style="word-break:break-word;">AbsTAU
+                                            <p class="institution">Tel-Aviv University</p><a href="https://arxiv.org/abs/1711.05240">(Goldman et al. 2018)</a></td>
+                                        <td>85.7</td>
+                                        <td>84.0</td>
+                                        <td>82.5</td>
+                                        <td>63.9</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>4</p><span class="date label label-default">Apr 4, 2018</span></td>
+                                        <td style="word-break:break-word;">BiATT-Pointer
+                                            <p class="institution">UNC Chapel Hill</p><a href="https://arxiv.org/pdf/1804.06870.pdf">(Tan and Bansal 2018)</a></td>
+                                        <td>74.6</td>
+                                        <td>73.9</td>
+                                        <td>71.8</td>
+                                        <td>37.2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>5</p><span class="date label label-default">Apr 22, 2017</span></td>
+                                        <td style="word-break:break-word;">MaxEnt
+                                            <p class="institution">Cornell University</p><a href="http://alanesuhr.com/suhr2017.pdf">(Suhr et al. 2017)</a></td>
+                                        <td>68.0</td>
+                                        <td>67.7</td>
+                                        <td>67.8</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>6</p><span class="date label label-default">Apr 22, 2017</span></td>
+                                        <td style="word-break:break-word;">Majority Class
+                                            <p class="institution">Cornell University</p><a href="http://alanesuhr.com/suhr2017.pdf">(Suhr et al. 2017)</a></td>
+                                        <td>55.3</td>
+                                        <td>56.2</td>
+                                        <td>55.4</td>
+                                        <td>-</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-static-bottom footer">
+        <div class="container clearfix">
+            <div class="rightNav">
+                <div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="https://github.com/lil-lab">To be filled</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

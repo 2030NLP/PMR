@@ -135,7 +135,7 @@ table th:first-child {
 }
 
 .infoCard {
-    background: #c8d7ee;
+    background: #d7dfeb;
     margin-bottom: 20px;
 }
 
@@ -361,6 +361,7 @@ button:focus {
     padding: 0px;
     font-weight: 100;
     text-align: center;
+	font-family: 'Archivo Black', sans-serif;
 }
 
 #topCover #appTitle b {
@@ -383,7 +384,7 @@ button:focus {
 }
 
 .footer {
-    background-color: #333;
+    background-color: #226594;
     border: none;
     border-radius: 0px;
     margin-bottom: 0px;

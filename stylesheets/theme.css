@@ -2,7 +2,7 @@ html,
 body {
     font-family: "Verdana";
     color: #5A5A5A;
-    background: #D3D3D3
+    background: #4189bb
 }
 
 h1 {
@@ -435,10 +435,6 @@ pre {
 
 p {
     margin: 0px;
-}
-
-body {
-    background-color: #fff;
 }
 
 a:hover,

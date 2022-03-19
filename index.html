@@ -5,25 +5,12 @@
 <head>
     <meta charset="utf-8">
     <title>Premise-based Multimodal Reasoning</title>
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PKU for Visual Reasoning Dataset">
-    <meta name="twitter:description" content="The Natural Language for Visual Reasoning corpora use the task of determining whether a sentence is true about a visual input, like an image. This task focuses on reasoning about sets of objects, comparisons, and spatial relations. This includes two datasets: NLVR, with synthetically generated images, and NLVR2, which includes natural photographs.">
-    <meta name="twitter:image" content="http://lic.nlp.cornell.edu/nlvr/img/preview1.jpg">
-    <meta name="description" content="The Natural Language for Visual Reasoning corpora use the task of determining whether a sentence is true about a visual input, like an image. This task focuses on reasoning about sets of objects, comparisons, and spatial relations. This includes two datasets: NLVR, with synthetically generated images, and NLVR2, which includes natural photographs.">
-    <meta property="og:url" content="http://lic.nlp.cornell.edu/nlvr/" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Cornell Natural Language for Visual Reasoning Dataset" />
-    <meta property="og:description" content="The Natural Language for Visual Reasoning corpora use the task of determining whether a sentence is true about a visual input, like an image. This task focuses on reasoning about sets of objects, comparisons, and spatial relations. This includes two datasets: NLVR, with synthetically generated images, and NLVR2, which includes natural photographs."
-    />
-    <meta property="og:image" content="http://lic.nlp.cornell.edu/nlvr/img/preview1.jpg" />
+ 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta property="og:image" content="logo.png">
-    <link rel="image_src" type="image/png" href="logo.png">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/theme.css">
     <link rel="stylesheet" href="stylesheets/index.css">
@@ -50,15 +37,8 @@
                             <a href="index.html">Home</a>
                         </li>
                         <li>
-                            <a href="pmr.html">Explore PMR</a>
+                            <a href="explore.html">Explore PMR</a>
                         </li>
-                        <!--          <li>
-            <a href="explore/v2.0/dev/">Explore 2.0</a>
-          </li>
-          <li>
-            <a href="explore/1.1/dev/">Explore 1.1</a>
-          </li>
--->
                     </ul>
                 </div>
             </div>
@@ -77,59 +57,6 @@
                 </div>
             </div>
             </center>
-            <script>
-                function draw_svgs(div_name) {
-                    var x_dim = 100;
-                    var y_dim = 100;
-                    var draw = SVG(div_name).size(x_dim, y_dim);
-
-                    var num_shapes = Math.floor(Math.random() * 3) + 1;
-                    for (var i = 0; i < num_shapes; i++) {
-                        var shape = Math.floor(Math.random() * 3);
-                        var color = Math.floor(Math.random() * 3);
-                        var size = (Math.floor(Math.random() * 3) + 1) * 10 + 10;
-
-                        var color_string;
-                        if (color == 0) {
-                            color_string = "black";
-                        } else if (color == 1) {
-                            color_string = "#1a9bfc";
-                        } else {
-                            color_string = "#fffd38";
-                        }
-
-                        if (shape == 0) {
-                            var center_x = Math.floor(Math.random() * (x_dim - size));
-                            var center_y = Math.floor(Math.random() * (y_dim - size));
-
-                            var circle = draw.circle(size).move(center_x, center_y).attr({
-                                fill: color_string
-                            });
-                        } else if (shape == 1) {
-                            var max_start_x = x_dim - size;
-                            var max_start_y = y_dim - size;
-
-                            var start_x = Math.floor(Math.random() * max_start_x);
-                            var start_y = Math.floor(Math.random() * max_start_y);
-
-                            var rect = draw.rect(size, size).move(start_x, start_y).attr({
-                                fill: color_string
-                            });
-                        } else {
-                            var max_start_x = x_dim - size * 2;
-                            var max_start_y = y_dim - size * 2;
-
-                            var start_x = Math.floor(Math.random() * max_start_x) + size;
-                            var start_y = Math.floor(Math.random() * max_start_y) + size;
-
-                            var polygon = draw.polygon(start_x.toString() + ',' + start_y.toString() + ' ' + (start_x + size).toString() + ',' + start_y.toString() + ' ' + (start_x + size / 2).toString() + ',' + (start_y - size).toString()).fill(color_string);
-                        }
-                    }
-                }
-
-                draw_svgs('leftShapes');
-                draw_svgs('rightShapes');
-            </script>
             <h2 id="appSubtitle">Premise-based Multimodal Reasoning</h2>
         </div>
     </div>
@@ -142,7 +69,7 @@
                     <div class="infoCard">
                         <div class="infoBody">
                             <div class="infoHeadline">
-                                <h2>Cornell Natural Language for Visual Reasoning</h2>
+                                <h2>Premise-based Multimodal Reasoning</h2>
                             </div>
                             <p>
                                 The Natural Language for Visual Reasoning corpora are two language grounding datasets containing natural language sentences grounded in images. The task is to determine whether a sentence is true about a visual input. The data was collected through crowdsourcings,
@@ -155,35 +82,6 @@
                             <p>
                                 <b>NLVR2</b> contains 107,292 examples of human-written English sentences grounded in pairs of photographs. NLVR2 retains the linguistic diversity of NLVR, while including much more visually complex images.
                             </p> <br/>
-                            <center>
-                                <a class="btn btn-default" href="https://github.com/clic-lab/nlvr/tree/master/nlvr2"><b>Data</b></a>
-                                <a class="btn btn-default" href="https://arxiv.org/abs/1811.00491"><b>Paper (Suhr et al. 2019)</b></a><br /><br />
-                                <button class="btn btn-default" data-toggle="collapse" data-target="#nlvr2_examples"><b>Show Examples from NLVR2</b></button>
-                                <div id="nlvr2_examples" class="collapse"><br />
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <img src="exs/ex0_0.jpg" style="border: #000000 1px outset; height: 100px;" /> <img src="exs/ex0_1.jpg" style="border: #000000 1px outset; height: 100px;" />
-
-                                        </div>
-                                        <center>The left image contains twice the number of dogs as the right image, and at least two dogs in total are standing.<br />
-                                            <span class="label label-success">true</span>
-                                        </center>
-                                    </div>
-                                    <br />
-
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <img src="exs/acorns_1.jpg" style="border: #000000 1px outset; width: 150px;" /> <img src="exs/acorns_6.jpg" style="border: #000000 1px outset; width: 150px;" />
-
-                                        </div>
-                                        <center>One image shows exactly two brown acorns in back-to-back caps on green foliage.
-                                            <br /><span class="label label-danger">false</span><br /><br /></center>
-                                        <b>Image Credit</b> (in order left-right, top-bottom): MemoryCatcher (CC0), Calabash13 (CC BY-SA 3.0), Charles Rondeau (CC0), Andale (CC0).
-                                    </div><br />
-                            </center>
-                            <br />
-                            <p>We only publicly release the sentence annotations and original image URLs, and scripts that download the images from the URLs. If you would like direct access to the images, please fill out this <a href="https://goo.gl/forms/yS29stWnFWzrDBFH3">Google Form</a>.
-                                This form asks for your basic information and asks you to agree to our Terms of Service.</p>
                             <hr>
                             <div class="infoHeadline">
                                 <h2>Natural Language for Visual Reasoning</h2>
@@ -192,56 +90,8 @@
                                 <b>NLVR</b> contains 92,244 pairs of human-written English sentences grounded in synthetic images. Because the images are synthically generated, this dataset can be used for semantic parsing.
                             </p> <br/>
                             <center>
-                                <a class="btn btn-default" href="https://github.com/clic-lab/nlvr/tree/master/nlvr"><b>Data</b></a>
-                                <a class="btn btn-default" href="https://yoavartzi.com/pub/slya-acl.2017.pdf"><b>Paper (Suhr et al. 2017)</b></a> <br /><br />
-                                <button class="btn btn-default" data-toggle="collapse" data-target="#nlvr_examples"><b>Show Examples from NLVR</b></button>
-                                <div id="nlvr_examples" class="collapse"><br />
-                                    <center>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <img src="exs/ex0.png" style="border: #000000 1px outset; width: 350px;" />
-                                            </div>
-                                            <center>There is exactly one black triangle not touching any edge<br />
-                                                <span class="label label-success">true</span>
-                                            </center>
-                                        </div>
-                                        <br />
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <img src="exs/sup_ex4.png" style="border: #000000 1px outset; width: 350px;" />
-                                            </div>
-                                            <center>there is at least one tower with four blocks with a yellow block at the base and a blue block below the top block<br /><span class="label label-success">true</span>
-                                                <center>
-                                        </div>
-
-                                        <br />
-
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <img src="exs/sup_ex6.png" style="border: #000000 1px outset; width: 350px;" />
-                                            </div>
-                                            <center>There is a box with multiple items and only one item has a different color.
-                                                <br /><span class="label label-danger">false</span>
-                                            </center>
-                                        </div>
-
-                                        <br />
-
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <img src="exs/sup_ex10.png" style="border: #000000 1px outset; width: 350px;" />
-                                            </div>
-                                            <center>There is exactly one tower with a blue block at the base and yellow block at the top</br><span class="label label-danger">false</span></center>
-                                        </div>
-
-                                        <br />
-
-                                        <p>More examples (from the development set) are available <a href="examples.html">here</a>.</p>
-
-                                        <br />
-
-                                        </center>
-                                </div>
+                                <a class="btn btn-default" href="https://github.com/2030NLP/PMR"><b>Data</b></a>
+                                <a class="btn btn-default" href="https://arxiv.org/abs/2105.07122"><b>Paper</b></a> <br /><br />
                                 </center>
                                 <hr>
                                 <div class="infoHeadline">
@@ -291,10 +141,9 @@
                                     <h2>Acknowledgments</h2>
                                 </div>
                                 <p>
-                                    This research was supported by the NSF (CRII-1656998), a Facebook ParlAI Research Award, an AI2 Key Scientific Challenges Award, Amazon Cloud Credits Grant, and support from Women in Technology New York. This material is based on work supported by the
-                                    National Science Foundation Graduate Research Fellowship under Grant No. DGE-1650441. We thank Mark Yatskar and Noah Snavely for their comments and suggestions, and the workers who participated in our data collection
-                                    for their contributions.</p><br />
-                                <p>Also thanks to <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a> for allowing us to use their code to create this website!</p>
+									This research is supported by the National Key Research and Development Program of China 2020AAA0106700 and NSFC project U19A2065.
+									We thank all the workers who participated in our data collection for their contributions.</p><br />
+                                <p>Also thanks to <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a> and <a href="https://visualcommonsense.com/">VCR</a> for allowing us to use their code to create this website!</p>
                                 </div>
                         </div>
                     </div>
@@ -303,10 +152,10 @@
                         <div class="infoCard">
                             <div class="infoBody">
                                 <div class="infoHeadline">
-                                    <h2>NLVR2 Leaderboard</h2>
+                                    <h2>PMR Leaderboard</h2>
                                 </div>
                                 <p>
-                                    NLVR2 presents the task of determining whether a natural language sentence is true about a pair of photographs.
+                                    PMR presents the task of determining whether a natural language sentence is true about a pair of photographs.
                                 </p>
                                 <table class="table performanceTable">
                                     <tr>

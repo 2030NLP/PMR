@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<!--Author: Alane Suhr for NLVR 2018; Adapted by Ziwei Qin for PMR 2022 -->
+<html>
+
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84290243-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-84290243-5');
+    </script>
+	
+    <meta charset="utf-8">
+    <title>Premise-based Multimodal Reasoning</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	
+    <link rel="image_src" type="image/png" href="logo.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="stylesheets/theme.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	
+	<!-- font style -->
+	<link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<!-- font style -->
+	
+	<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/svg.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+	
+	<link href="./style.css" rel="stylesheet">
+    <style>
+        .prob {
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+		@media (min-width: 600px) {
+			.container-fluid{
+				max-width: 800px;
+			}
+		}
+		<!-- .container-fluid{ -->
+			<!-- width: 800px;	 -->
+		<!-- } -->
+    </style>
+</head>
+
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" id="topNavbar" role="navigation">
+        <div class="container clearfix" id="navContainer">
+            <div class="rightNav">
+                <div class="collapseDiv">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="pmr.html">Explore PMR</a>
+                        </li>
+                        <!--          <li>
+            <a href="explore/v2.0/dev/">Explore 2.0</a>
+          </li>
+          <li>
+            <a href="explore/1.1/dev/">Explore 1.1</a>
+          </li>
+-->
+                    </ul>
+                </div>
+            </div>
+            <div class="leftNav">
+                <div class="brandDiv">
+                    <a class="navbar-brand" href="index.html">PMR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	    <main role="main" class="container-fluid primarycontainer">
+        <div class="jumbotron" style="padding-top:1rem; padding-bottom: 1rem;background-color: #d7dfeb">
+            <h1><span class="pmremph">PMR</span> Exploration</h1>
+
+            <p class="lead">Use the UI below to browse the dataset in val-ori split.</p>
+        </div>
+        <div class="row" style="padding-top:1rem; padding-bottom: 1rem;">
+            <div class="col-lg-12">
+
+                <div class="form-group input-group mb-3">
+                    <div class="input-group-addon button-group-bk-color">
+                        <button type="button" class="btn btn-info" id="fastbackward"><i class="fas fa-fast-backward"></i></button>
+                        <button type="button" class="btn" id="stepbackward"><i class="fas fa-step-backward"></i></button>
+                        <button type="button" class="btn" id="random"><i class="fas fa-random"></i></button>
+                        <button type="button" class="btn" id="stepforward"><i class="fas fa-step-forward"></i></button>
+                        <button type="button" class="btn" id="fastforward"><i class="fas fa-fast-forward"></i></button>
+                    </div>
+					<div class="input-group-addon button-group-bk-color">
+						<input type="text" class="form-control" placeholder="" id="imgid">
+					</div>
+                    <div class="input-group-addon button-group-bk-color">
+                        <button type="button" class="btn btn-success" id="goto">Go! &nbsp;<i class="fas fa-play"></i></button>
+                    </div>
+                </div>
+
+                <div class="img-container">
+                    <img id='annotimage' class="img-fluid annotimage" src="">
+                    <div id="drawing" class="drawing-class"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="globalbutton" class="col-lg-2 text-center" style="padding:0;"></div>
+            <div class="col-lg-10 buttonrow"></div>
+        </div>
+
+        <div id="annots">
+            <!-- things go here-->
+        </div>
+        </div>
+    </main>
+    <nav class="navbar navbar-default navbar-static-bottom footer">
+        <div class="container clearfix">
+            <div class="rightNav">
+                <div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="https://github.com/lil-lab">To be filled</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.5/svg.min.js" integrity="sha256-QvaFssiJCr71CxCZfYVWAXXGlwAqXbXerSdoW2t/Few=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.7/chroma.min.js"></script>
+    <script src="https://cdn.rawgit.com/internalfx/distinct-colors/3bbd4cc2/dist/distinct-colors.min.js"></script>
+</body>
+<script>
+    const FONTSIZE = 30;
+    const searchParams = new URLSearchParams(window.location.search);
+
+    function flattenPoints(points) {
+        const scaledPoints = [];
+        for (let i = 0; i < points.length; i++) {
+            scaledPoints.push(points[i][0]);
+            scaledPoints.push(points[i][1]);
+        }
+        return scaledPoints
+    }
+
+    function drawSegmentation(name, box, segm, color, width, height) {
+        const draw = SVG('drawing').viewbox(0, 0, width, height);
+        draw.addClass('segmentation');
+
+        var opacity_mult = 1.0;
+        var font_weight = 300;
+        var color2use = '#000';
+        var fontsize = FONTSIZE;
+        for (let i = 0; i < segm.length; i++) {
+            draw.polygon(flattenPoints(segm[i])).fill({
+                color: color.brighten(3).hex(),
+                opacity: 0.15 * opacity_mult
+            }).stroke({
+                opacity: 0.7 * opacity_mult,
+                width: 8,
+                color: color.brighten(2).hex()
+            });
+        }
+        draw.rect(box[2] - box[0], box[3] - box[1]).move(box[0], box[1]).fill({
+            opacity: 0
+        }).stroke({
+            opacity: 0.8 * opacity_mult,
+            width: 5,
+            color: color.hex()
+        });
+
+        // const group = draw.group();
+        const topY = box[1] - fontsize - 7 > 0 ? box[1] - fontsize - 7 : box[1] - 3;
+
+        const mytext = draw.text(name).move(box[0] + 2, topY).font({
+            family: 'Roboto Mono',
+            size: fontsize,
+            weight: font_weight
+        }).fill(color2use);
+        const thebox = mytext.bbox();
+        draw.rect(thebox.w + 4, thebox.h + 4).move(thebox.x, thebox.y - 2).fill({
+            color: color.brighten(2).hex(),
+            opacity: 0.8 * opacity_mult
+        }).stroke({
+            opacity: 0.8 * opacity_mult,
+            width: 3,
+            color: color.hex()
+        }).backward();
+        return draw;
+    }
+
+    function getNewNames(old_names) {
+        // Turns old names  like [person, person] into [person1, person2], etc.
+        const new_names = [];
+        const object_counts = {};
+        // const new_names = [];
+        for (let i = 0; i < old_names.length; i++) {
+            if (!(old_names[i] in object_counts)) {
+                object_counts[old_names[i]] = 0;
+            }
+            object_counts[old_names[i]] += 1;
+            new_names.push(old_names[i] + object_counts[old_names[i]]);
+        }
+        return new_names;
+    }
+
+    function drawFromFn(img_fn, annot_fn, new_names) {
+		$('#annotimage').attr('src', 'https://abc-public-resource-all.s3.ap-northeast-2.amazonaws.com/vcr1images/' + img_fn);
+        $.getJSON('https://abc-public-resource-all.s3.ap-northeast-2.amazonaws.com/vcr1images/' + annot_fn, function(data) {
+            // Show or hide on hover
+            const palette = new DistinctColors({
+                count: new_names.length,
+                lightMin: 25
+            });
+            $('#drawing').empty();
+            const buttonrow = $('.buttonrow');
+            buttonrow.empty();
+
+            for (let i = 0; i < new_names.length; i++) {
+                $('.' + new_names[i]).css('background-color', palette[i].brighten(2).alpha(0.8).hex('rgba'));
+
+                let bgcolor = palette[i].darker().hex();
+                let bgcolorHighlight = palette[i].brighten().hex();
+
+                let mybutton = $('<button type="button" class="btn image-toggle active" style="background-color: ' + bgcolorHighlight + '; color: #000" data-toggle="button" aria-pressed="true">').text('[' + new_names[i] + ']');
+                let draw = drawSegmentation('[' + new_names[i] + ']', data.boxes[i], data.segms[i], palette[i], data.width, data.height);
+                mybutton.on('click', function() {
+                    if (mybutton.attr('aria-pressed') === 'true') {
+                        mybutton.css({
+                            backgroundColor: bgcolor,
+                            color: '#fff'
+                        });
+                        draw.attr('opacity', 0);
+                    } else {
+                        draw.attr('opacity', 1);
+                        mybutton.css({
+                            backgroundColor: bgcolorHighlight,
+                            color: '#000'
+                        });
+                    }
+                });
+                mybutton.hover(function() {
+                    if (mybutton.attr('aria-pressed') === 'true') {
+                        mybutton.css({
+                            backgroundColor: bgcolor,
+                            color: '#fff'
+                        });
+                    } else {
+                        mybutton.css({
+                            backgroundColor: bgcolorHighlight,
+                            color: '#000'
+                        });
+                    }
+                }, function() {
+                    if (mybutton.attr('aria-pressed') === 'true') {
+                        mybutton.css({
+                            backgroundColor: bgcolorHighlight,
+                            color: '#000'
+                        });
+                    } else {
+                        mybutton.css({
+                            backgroundColor: bgcolor,
+                            color: '#fff'
+                        });
+                    }
+                });
+                buttonrow.append(mybutton);
+            }
+        });
+    }
+
+    const noSpaceBefore = ['\'', '.', ':', ';', ',', '!', '?'];
+    const noSpaceAfter = ['\''];
+
+    function mergeSpans(span0, span1) {
+        // console.log("MERGING THESE2")
+        // console.log(span0)
+        // console.log(span1)
+        // console.log("-------------")
+        if (span1.length === 0) {
+            return span0;
+        } else if (span0.length === 0) {
+            return span1;
+        }
+
+        if (($.inArray(span0[span0.length - 1], noSpaceAfter) > -1) || ($.inArray(span1[0], noSpaceBefore)) > -1) {
+            return span0 + span1;
+        }
+        return span0 + ' ' + span1;
+    }
+
+    function detokenize(tokens, object_names) {
+        const tokens_and_stuff = [];
+
+        let useAgain = false;
+        for (let i = 0; i < tokens.length; i++) {
+            if (Array.isArray(tokens[i])) {
+                // add a space
+                if (i > 0) {
+                    tokens_and_stuff[tokens_and_stuff.length - 1] += ' ';
+                }
+
+                for (let j = 0; j < tokens[i].length; j++) {
+                    if (j > 0) {
+                        if (j === (tokens[i].length - 1)) {
+                            tokens_and_stuff.push(' and ');
+                        } else {
+                            tokens_and_stuff.push(', ');
+                        }
+                    }
+                    tokens_and_stuff.push($('<span class="person ' + object_names[tokens[i][j]] + '">').text('[' + object_names[tokens[i][j]] + ']'));
+                }
+                useAgain = false;
+            } else if (useAgain) {
+                tokens_and_stuff[tokens_and_stuff.length - 1] = mergeSpans(tokens_and_stuff[tokens_and_stuff.length - 1], tokens[i]);
+            } else {
+                if (i === 0) {
+                    tokens_and_stuff.push(tokens[i]);
+                } else {
+                    // Add space because we just saw an object
+                    tokens_and_stuff.push(' ' + tokens[i]);
+                }
+                useAgain = true;
+            }
+        }
+        return tokens_and_stuff;
+    }
+
+    function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+    }
+
+    function fixProb(prob) {
+        return $('<span class="prob">').text((prob * 100).toFixed(1) + '%');
+    }
+
+    function argMax(array) {
+        return array.map((x, i) => [x, i]).reduce((r, a) => (a[0] > r[0] ? a : r))[1];
+    }
+
+    function update(ind) {
+	//110.json
+        <!-- $.getJSON('https://s3.us-west-2.amazonaws.com/ai2-rowanz/demo_annots/' + ind + '.json', function(data) { -->
+		$.getJSON('https://abc-public-resource-all.s3.ap-northeast-2.amazonaws.com/val-ori-for-display/' + ind + '.json', function(data) {
+            $('#imgid').val(ind);
+            $('#moviename').text('Movie (not part of the task - just for fun): ' + data[0]['movie'].replace(/_/g, ' '));
+            searchParams.set('im', ind);
+
+            let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+            history.pushState(null, '', newRelativePathQuery);
+
+            // window.location.search = searchParams.toString();
+
+            const img_fn = data[0]['img_fn'];
+            const annot_fn = data[0]['metadata_fn'];
+            const new_names = getNewNames(data[0]['objects']);
+            drawFromFn(img_fn, annot_fn, new_names);
+
+            $('#annots').empty();
+            for (let i = 0; i < data.length; i++) {
+
+                let premise = $('<p class="card-text">').append('Premise: ').append(detokenize(data[i]['premise'], new_names));
+
+                let answers = $('<div class="btn-group-vertical answergroup" id="a' + i + '">');
+                //let rationales = $('<div class="btn-group-vertical answergroup" id="r' + i + '">');
+
+                for (let j = 0; j < 4; j++) {
+                    let letter = 'abcd' [j] + ') ';
+                    answers.append($('<button type="button" class="btn btn-sm btn-outline-dark answerbutton">').append(letter).append(detokenize(data[i]['answer_choices'][j], new_names)));
+					//.append(fixProb(data[i]['pred_a'][j])));
+                    //rationales.append($('<button type="button" class="btn btn-sm btn-outline-dark answerbutton">').append(letter).append(detokenize(data[i]['rationale_choices'][j], new_names)).append(fixProb(data[i]['pred_r'][j])));
+                }
+				
+                //answers.children().eq(data[i]['answer_label']).addClass('clicked-correct');
+                //rationales.children().eq(data[i]['rationale_label']).addClass('clicked-correct');
+
+                //if (argMax(data[i]['pred_a']) !== data[i]['answer_label']) {
+                //    answers.children().eq(argMax(data[i]['pred_a'])).addClass('clicked-wrong');
+                //}
+                //if (argMax(data[i]['pred_r']) !== data[i]['rationale_label']) {
+                 //   rationales.children().eq(argMax(data[i]['pred_r'])).addClass('clicked-wrong');
+                //}
+
+                let qablock = $('<div class="card box-shadow">').append($('<div class="card-body">').append(premise).append(answers).append($('<p class="msg">')));
+                qablock.appendTo('#annots');
+
+                //let qarblock = $('<div class="card box-shadow">').append($('<div class="card-body">').append($('<p class="card-text">').text('I think so because...')).append(rationales).append($('<p class="msg">')));
+                // qarblock.appendTo('#annots');
+
+                $('<div class="row annotationrow">').append($('<div class="col-lg-12">').append(qablock)).append($('<div class="col-lg-12">')).appendTo('#annots');
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        var ind = 1024;
+        if (searchParams.has('im')) {
+            ind = parseInt(searchParams.get('im'));
+            if ((ind < 0) || (ind > 1537)) {
+                alert("index must be between 0 and 1527 inclusive");
+            }
+        }
+        update(ind);
+
+
+        let hideall = $('<button type="button" class="btn btn-outline-dark">').text('hide all').appendTo('#globalbutton');
+        hideall.on('click', function() {
+            $('.buttonrow > button.active').click();
+        });
+
+        let showall = $('<button type="button" class="btn btn-outline-dark">').text('show all').appendTo('#globalbutton');
+        showall.on('click', function() {
+            $('.buttonrow > button:not(.active)').click();
+        });
+
+        $('#goto').on('click', function() {
+            let target = $('#imgid').val();
+            if (isNaN(parseInt(target))) {
+                alert("Invalid image ID. It should be a single number.");
+            } else {
+                let number = parseInt(target);
+                if ((number < 0) || (number > 1537)) {
+                    alert("ID must be between 0 and 1537 inclusive");
+                } else {
+                    ind = number;
+                    update(number);
+                }
+            }
+        });
+
+        $('#imgid').on('keypress', function(e) {
+            if (e.keyCode === 13) {
+                $('#goto').click();
+            }
+        });
+
+        [100, 200, 300, 400].forEach(function(x) {
+            $('#' + x).on('click', function() {
+                ind = x;
+                update(x);
+            });
+        });
+
+        $('#fastbackward').on('click', function() {
+            ind = Math.max(ind - 100, 0);
+            update(ind);
+        });
+        $('#fastforward').on('click', function() {
+            ind = Math.min(ind + 100, 1537);
+            update(ind);
+        });
+        $('#stepforward').on('click', function() {
+            ind = Math.min(ind + 1, 1537);
+            update(ind);
+        });
+        $('#stepbackward').on('click', function() {
+            ind = Math.max(ind - 1, 0);
+            update(ind);
+        });
+        $('#random').on('click', function() {
+            ind = getRandomIntInclusive(0, 1537);
+            update(ind);
+        });
+    });
+</script>
+</html>

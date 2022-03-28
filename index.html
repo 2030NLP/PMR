@@ -71,7 +71,12 @@
                             <div class="infoHeadline">
                                 <h2>Premise-based Multimodal Reasoning</h2>
                             </div>
-                            
+                            <p>
+							Premise-based Multi-modal Reasoning(PMR) is a task that the inference model should be able to reason with both textual (from the premise) and visual(from images) clues.</p>
+							<p>
+							The PMR dataset contains 15,360 manually annotated samples and adversarial samples with the same size as the former. You can browse them in Explore page.
+							</p>
+							<br>
                             <center>
                                 <a class="btn btn-default" href="https://github.com/2030NLP/PMR"><b>Data</b></a>
                                 <a class="btn btn-default" href="https://arxiv.org/abs/2105.07122"><b>Paper</b></a> <br /><br />
@@ -80,32 +85,6 @@
                                 <div class="infoHeadline">
                                     <h2>Leaderboards</h2>
                                 </div>
-                                <hr>
-                                <div class="infoHeadline">
-                                    <h2>Questions?</h2>
-                                </div>
-                                <p>
-                                    Please visit our <a href="https://github.com/clic-lab/nlvr/issues">Github issues page</a> or email us at
-                                    <center> nlvr
-                                        < at> googlegroups.com </center>
-                                </p>
-                                <p>Please email us if you wish to run on an unreleased test set. To keep up to date with major changes, please subscribe:</p><br />
-                                <!-- Begin MailChimp Signup Form -->
-                                <div id="mc_embed_signup">
-                                    <form action="//cornell.us16.list-manage.com/subscribe/post?u=277cae703143a6cfcb4d547ed&amp;id=652b330f60" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form-inline" target="_blank" novalidate>
-                                        <div id="mc_embed_signup_scroll">
-                                            <div class="mc-field-group form-group">
-                                                <input type="email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" placeholder="email address">
-                                            </div>
-                                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                                                <input type="text" name="b_277cae703143a6cfcb4d547ed_652b330f60" tabindex="-1" value="">
-                                            </div>
-                                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">
-                                        </div>
-                                    </form>
-                                </div>
-                                <hr/>
                                 <div class="infoHeadline">
                                     <h2>Acknowledgments</h2>
                                 </div>
@@ -124,9 +103,32 @@
                                     <h2>PMR Leaderboard</h2>
                                 </div>
                                 <p>
-                                    PMR presents the task of determining whether a natural language sentence is true about a pair of photographs.
+                                    
                                 </p>
-                               
+								<table class="table performanceTable">
+									<tbody>
+										<tr>
+											<th>Rank</th>
+											<th>Model</th>
+											<th>Mix-Accuracy</th>
+										</tr>
+										<tr class="human-row">
+											<td></td>
+											<td>ERNIE-VIL-Large</td>
+											<td>77.6</td>
+										</tr>
+										<tr class="human-row">
+											<td></td>
+											<td>VLBERT-Large</td>
+											<td>76.4</td>
+										</tr>
+										<tr class="human-row">
+											<td></td>
+											<td>UNITER-Large</td>
+											<td>73.2</td>
+										</tr>
+									</tbody>
+								</table>
                             </div>
                         </div>
                     </div>
@@ -140,7 +142,7 @@
                 <div>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="https://github.com/lil-lab">To be filled</a>
+                            <a href="http://icl.pku.edu.cn/">PKU Institute of Computational Linguistics</a>
                         </li>
                     </ul>
                 </div>

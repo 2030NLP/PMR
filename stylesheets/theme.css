@@ -15,7 +15,7 @@ h2 {
 }
 
 a {
-    color: #0080FF;
+    color: #4189bb;
 }
 
 table {
@@ -441,7 +441,7 @@ a:hover,
 a:active,
 a:focus {
     text-decoration: none !important;
-    color: #ffff07;
+    color: #ebf3ff;
 }
 
 ul {

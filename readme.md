@@ -62,6 +62,7 @@ We provide baseline models here. They are adapted from three vision-language pre
 3. [ERINIE](https://github.com/paddlepaddle/ernie/tree/repro/ernie-vil)
 ### Citation
 Please consider citing this paper if you find this repository useful:
+```
 @article{PMR2022,
 	title	= {Premise-based Multimodal Reasoning: {A} Human-like Cognitive Process},
 	author  = {Qingxiu Dong and
@@ -80,3 +81,4 @@ Please consider citing this paper if you find this repository useful:
 	volume  = {abs/2105.07122},
 	year    = {2021},
 }
+```

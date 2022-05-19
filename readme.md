@@ -3,6 +3,117 @@
 Premise-based Multi-modal Reasoning(PMR) is a task that explores the ability of models to reason with both textual (from the premise) and visual(from images) clues.
 
 Through manually annotation and adversarial generation, we create PMR dataset with 32,720 samples. Here are the stats for PMR, and you can explore it on our [website](https://2030nlp.github.io/PMR).
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky" colspan="3"><span style="font-weight:bold">Ori.</span></th>
+    <th class="tg-0pky" colspan="3"><span style="font-weight:bold">Adv.</span></th>
+    <th class="tg-0pky">Total~</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"><span style="font-weight:bold">Train</span></td>
+    <td class="tg-0pky"><span style="font-weight:bold">Val</span></td>
+    <td class="tg-0pky"><span style="font-weight:bold">Test</span></td>
+    <td class="tg-0pky"><span style="font-weight:bold">Train</span></td>
+    <td class="tg-0pky"><span style="font-weight:bold">Val</span></td>
+    <td class="tg-0pky"><span style="font-weight:bold">Test</span></td>
+    <td class="tg-0pky"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">\#samples</td>
+    <td class="tg-0pky">12,080</td>
+    <td class="tg-0pky">1,538</td>
+    <td class="tg-0pky">1,742</td>
+    <td class="tg-0pky">12,080</td>
+    <td class="tg-0pky">1,538</td>
+    <td class="tg-0pky">1,742</td>
+    <td class="tg-0pky">30,720</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">\#unique 1-gram</td>
+    <td class="tg-0pky">9,882</td>
+    <td class="tg-0pky">3,819</td>
+    <td class="tg-0pky">4,101</td>
+    <td class="tg-0pky">8,046</td>
+    <td class="tg-0pky">3,071</td>
+    <td class="tg-0pky">3,359</td>
+    <td class="tg-0pky">11,041</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">\#unique 2-gram</td>
+    <td class="tg-0pky">72,048</td>
+    <td class="tg-0pky">17,678</td>
+    <td class="tg-0pky">19,292</td>
+    <td class="tg-0pky">50,526</td>
+    <td class="tg-0pky">12,236</td>
+    <td class="tg-0pky">13,453</td>
+    <td class="tg-0pky">84,365</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Avg premise length</td>
+    <td class="tg-0pky">9.48</td>
+    <td class="tg-0pky">9.47</td>
+    <td class="tg-0pky">9.54</td>
+    <td class="tg-0pky">9.48</td>
+    <td class="tg-0pky">9.47</td>
+    <td class="tg-0pky">9.54</td>
+    <td class="tg-0pky">9.49</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Avg action text length</td>
+    <td class="tg-0pky">14.38</td>
+    <td class="tg-0pky">14.41</td>
+    <td class="tg-0pky">14.45</td>
+    <td class="tg-0pky">14.20</td>
+    <td class="tg-0pky">14.42</td>
+    <td class="tg-0pky">14.31</td>
+    <td class="tg-0pky">14.31</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Avg \#objects mentioned</td>
+    <td class="tg-0pky">1.92</td>
+    <td class="tg-0pky">1.91</td>
+    <td class="tg-0pky">1.94</td>
+    <td class="tg-0pky">2.42</td>
+    <td class="tg-0pky">2.43</td>
+    <td class="tg-0pky">2.38</td>
+    <td class="tg-0pky">2.17</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">\#images</td>
+    <td class="tg-0pky">9,536</td>
+    <td class="tg-0pky">1,213</td>
+    <td class="tg-0pky">1,370</td>
+    <td class="tg-0pky">9,536</td>
+    <td class="tg-0pky">1,213</td>
+    <td class="tg-0pky">1,370</td>
+    <td class="tg-0pky">12,119</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">\#movies covered</td>
+    <td class="tg-0pky">1,353</td>
+    <td class="tg-0pky">209</td>
+    <td class="tg-0pky">170</td>
+    <td class="tg-0pky">1,353</td>
+    <td class="tg-0pky">209</td>
+    <td class="tg-0pky">170</td>
+    <td class="tg-0pky">1,732</td>
+  </tr>
+</tbody>
+</table>
+
 ## Dataset Access
 Dataset can be downloaded at [Google Drive](https://drive.google.com/drive/folders/15IZny7KKz4RRwd9c9D1ob3Bi3orsqQMe?usp=sharing).
 

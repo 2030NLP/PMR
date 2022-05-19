@@ -1,9 +1,13 @@
 # PMR
-### Introduction
+## Introduction
 Premise-based Multi-modal Reasoning(PMR) is a task that explores the ability of models to reason with both textual (from the premise) and visual(from images) clues.
+
 Through manually annotation and adversarial generation, we create PMR dataset with 32,720 samples. Here are the stats for PMR, and you can explore it on our [website](https://2030nlp.github.io/PMR).
 ## Dataset Access
 Dataset can be downloaded at [Google Drive](https://drive.google.com/drive/folders/15IZny7KKz4RRwd9c9D1ob3Bi3orsqQMe?usp=sharing).
+
+PMR has been selected as one of the evalution tasks on CCL2022, and we provide full train and validation sets(both original and adversarial samples) to train models. For model evalution, you can submit the predictions of model on test set(`test-ori-without-label.jsonl`) by mailing at corlder@outlook.com, and we will give feedback timely.
+
 ### Data Format
 Here is a brief introduction to the data format.
 ```
@@ -52,4 +56,27 @@ Here is a brief introduction to the data format.
 }
 ```
 ### Baseline Models
-We provide baseline models here. They are adapted from three Vision-Language Pretrained models which have great performance on multimodal understanding tasks.
+We provide baseline models here. They are adapted from three vision-language pretrained models which have great performance on multimodal understanding tasks.
+1. [VL-BERT](https://github.com/jackroos/VL-BERT)
+2. [UNITER](https://github.com/ChenRocks/UNITER)
+3. [ERINIE](https://github.com/paddlepaddle/ernie/tree/repro/ernie-vil)
+### Citation
+Please consider citing this paper if you find this repository useful:
+@article{PMR2022,
+	title	= {Premise-based Multimodal Reasoning: {A} Human-like Cognitive Process},
+	author  = {Qingxiu Dong and
+               Ziwei Qin and
+               Heming Xia and
+               Tian Feng and
+               Shoujie Tong and
+               Haoran Meng and
+               Lin Xu and
+               Tianyu Liu and
+               Zuifang Sui and
+               Weidong Zhan and
+               Sujian Li and
+               Zhongyu Wei},
+	journal = {CoRR},
+	volume  = {abs/2105.07122},
+	year    = {2021},
+}

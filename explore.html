@@ -235,8 +235,8 @@
     }
 
     function drawFromFn(img_fn, annot_fn, new_names) {
-		$('#annotimage').attr('src', 'https://abc-public-resource-all.s3.ap-northeast-2.amazonaws.com/vcr1images/' + img_fn);
-        $.getJSON('https://abc-public-resource-all.s3.ap-northeast-2.amazonaws.com/vcr1images/' + annot_fn, function(data) {
+		$('#annotimage').attr('src', 'https://abc-public-resource-all.s3.ap-northeast-2.amazonaws.com/images/' + img_fn);
+        $.getJSON('https://abc-public-resource-all.s3.ap-northeast-2.amazonaws.com/images/' + annot_fn, function(data) {
             // Show or hide on hover
             const palette = new DistinctColors({
                 count: new_names.length,

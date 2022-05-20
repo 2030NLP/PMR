@@ -25,7 +25,7 @@ Through manually annotation and adversarial generation, we create PMR dataset wi
     <td class="tg-0pky"></td>
   </tr>
   <tr>
-    <td class="tg-0pky">\#samples</td>
+    <td class="tg-0pky">#samples</td>
     <td class="tg-0pky">12,080</td>
     <td class="tg-0pky">1,538</td>
     <td class="tg-0pky">1,742</td>
@@ -35,7 +35,7 @@ Through manually annotation and adversarial generation, we create PMR dataset wi
     <td class="tg-0pky">30,720</td>
   </tr>
   <tr>
-    <td class="tg-0pky">\#unique 1-gram</td>
+    <td class="tg-0pky">#unique 1-gram</td>
     <td class="tg-0pky">9,882</td>
     <td class="tg-0pky">3,819</td>
     <td class="tg-0pky">4,101</td>
@@ -45,7 +45,7 @@ Through manually annotation and adversarial generation, we create PMR dataset wi
     <td class="tg-0pky">11,041</td>
   </tr>
   <tr>
-    <td class="tg-0pky">\#unique 2-gram</td>
+    <td class="tg-0pky">#unique 2-gram</td>
     <td class="tg-0pky">72,048</td>
     <td class="tg-0pky">17,678</td>
     <td class="tg-0pky">19,292</td>
@@ -75,7 +75,7 @@ Through manually annotation and adversarial generation, we create PMR dataset wi
     <td class="tg-0pky">14.31</td>
   </tr>
   <tr>
-    <td class="tg-0pky">Avg \#objects mentioned</td>
+    <td class="tg-0pky">Avg #objects mentioned</td>
     <td class="tg-0pky">1.92</td>
     <td class="tg-0pky">1.91</td>
     <td class="tg-0pky">1.94</td>
@@ -85,7 +85,7 @@ Through manually annotation and adversarial generation, we create PMR dataset wi
     <td class="tg-0pky">2.17</td>
   </tr>
   <tr>
-    <td class="tg-0pky">\#images</td>
+    <td class="tg-0pky">#images</td>
     <td class="tg-0pky">9,536</td>
     <td class="tg-0pky">1,213</td>
     <td class="tg-0pky">1,370</td>
@@ -95,7 +95,7 @@ Through manually annotation and adversarial generation, we create PMR dataset wi
     <td class="tg-0pky">12,119</td>
   </tr>
   <tr>
-    <td class="tg-0pky">\#movies covered</td>
+    <td class="tg-0pky">#movies covered</td>
     <td class="tg-0pky">1,353</td>
     <td class="tg-0pky">209</td>
     <td class="tg-0pky">170</td>
@@ -159,12 +159,12 @@ Here is a brief introduction to the data format.
 	"answer_ori_ids":[14097, 12681, 387, 13170]
 }
 ```
-### Baseline Models
+## Baseline Models
 We provide baseline models here. They are adapted from three vision-language pretrained models which have great performance on multimodal understanding tasks.
 1. [VL-BERT](https://github.com/jackroos/VL-BERT)
 2. [UNITER](https://github.com/ChenRocks/UNITER)
 3. [ERINIE](https://github.com/paddlepaddle/ernie/tree/repro/ernie-vil)
-### Citation
+## Citation
 Please consider citing this paper if you find this repository useful:
 ```
 @article{PMR2022,

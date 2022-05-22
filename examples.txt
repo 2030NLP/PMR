@@ -1,0 +1,4 @@
+# prediction为answer_choices中选项的索引，取值[0,3]
+{"total_id": 1, "img_id": "test-860", "prediction":[0-3]}
+{"total_id": 15, "img_id": "test-398", "prediction":[0-3]}
+...

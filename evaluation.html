@@ -1,0 +1,673 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>基于前提的跨模态推理评测</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b884504a-83da-496d-b235-b422df0ec33b" class="page sans"><header><h1 class="page-title">基于前提的跨模态推理评测</h1></header><div class="page-body"><h2 id="bd1f9898-00f5-44ae-afa0-510c12e316e9" class="">任务名称：认知推理——基于前提的跨模态推理评测</h2><h3 id="8831f765-e0ff-49d5-a002-75960455f602" class="">一、任务简介</h3><p id="c14b42ba-d94a-45f6-9364-17272f4d89fc" class="">在视觉与语言的跨模态推理方向上，常见做法是给定图片形式的事件和文本形式的问题，让机器在多个备选答案中选择符合图片内容的答案。我们认为过去的这类研究属于 &quot;无条件 &quot;的跨模态推理，即对图像没有指定任何先验知识，而在实际场景中，却往往不是如此。认知心理学中的ABC理论（Ellis, 1995）表明，人类的情绪和由此产生的行为并不直接来自于特定事件，而是来自于特定前提下对事件的解读。受此启发，我们提出了一个 &quot;基于前提的跨模态推理&quot;任务（PMR）。在这个任务中，我们为相同图片提供了不同的前提背景信息（文本形式），要求模型先根据背景信息解读图片，再正确回答文本形式的问题。PMR的数据集包含15,360个人工标注的前提-图片-问答对，每个样本都经过了多阶段的众包标注和审核，该任务以高质量的数据为机器跨模态推理提出了更高的挑战。</p><p id="e1d1ef20-aa0b-445b-90a8-ed971330f243" class="">基于前提的跨模态推理评测设置为单个主任务，每一张图片配有一条文本形式的前提句和问句，以及四个可能的选项，模型需要基于前提线索理解图片，再从四个选项中选择唯一符合问题和图片的答案。</p><h3 id="81c8c2ca-59e0-4d34-9cd2-951897d901a9" class="">二、数据介绍</h3><p id="8818632c-3f8d-4de8-a9f8-36251586a49d" class="">数据样例如下，每一张图片配有一条文本形式的前提句和一个问句，以及四个可能的选项，模型需要基于前提线索理解图片，再从四个选项中选择唯一符合问题和图片的答案，图片提供元素标注信息，方便只熟悉文本的参赛者参与评测，图片中的元素标注和文本中的实体保持一致。</p><figure id="bb2a4d49-605d-48c4-b8e5-3fc167c4e578" class="image"><a href="src/sample.png"><img style="width:1230px" src="src/sample.png"/></a></figure><p id="a3c361ec-7bb4-4223-b91c-3c3190d7d114" class="">我们的标注过程确保了仅凭借文本形式的前提线索或者图片形式的场景线索都无法在四个选项中选出唯一正确的选项，因此，该评测要求模型必须在重复利用前提、图片、问题的基础上做出分类。</p><p id="a17d7b34-8276-4b72-9f58-708f6cdf4ba2" class="">数据规模上，该评测任务包含15,360个人工标注的前提-图片-问答对，以及15,360个对抗匹配自动生成的前提-图片-问答对，前提句和答案句的平均长度分别是9.49和14.31词。</p><p id="79bbadc3-3310-43ed-9cb8-1a80e583b9d2" class="">将文本形式的条件引入跨模态推理是该评测的主要动机之一，因此前提句的设计至关重要。数据集中的前提句包含六个不同大类，具体分布情况如下图：</p><figure id="37d6e44f-d789-441c-bf6d-928e1aba0319" class="image"><a href="src/distribution.png"><img style="width:622px" src="src/distribution.png"/></a></figure><p id="7fa53470-c9d9-40ae-bc0c-78301669a4c6" class="">更多数据样例及demo展示见<a href="https://2030nlp.github.io/PMR/explore.html?im=1024">https://2030nlp.github.io/PMR/explore.html?im=1024</a>。</p><p id="891436a8-8044-4a00-80bb-9ec72021ef2c" class="">
+</p><h3 id="ec513a71-3539-489e-8ba9-300c7fab19bf" class="">三、评价标准</h3><p id="b8d1af7c-840b-4107-9df8-e5d084a8217c" class="">该评测任务为分类任务，每个样例有四个备选答案，其中有唯一正确答案，我们用模型选中正确答案的Accuracy作为评测指标。最终的评测成绩计算比较简单，直接采用每一组最后一次提交结果的Accuracy作为最终成绩。</p><h3 id="c9e9386f-5ece-40e0-b146-399f53428dc1" class="">四、预计赛程</h3><ul id="652d0137-f2cc-43c9-902b-1313a0efe2e0" class="bulleted-list"><li style="list-style-type:disc">评测开始（2022年6月1日）<ul id="7fcf180b-9d6f-462b-9a43-06fdf2abe367" class="bulleted-list"><li style="list-style-type:circle">发布报名系统，开放报名</li></ul><ul id="f2c764c8-db4f-4eb5-8b19-7a87b68eeac7" class="bulleted-list"><li style="list-style-type:circle">发布训练集以及不带答案的验证集</li></ul><ul id="a48bebe2-213b-41e5-b940-e51394a9d638" class="bulleted-list"><li style="list-style-type:circle">发布基线模型、排行榜页面、结果提交页面</li></ul></li></ul><ul id="79eff29a-e9b6-44d3-a1e2-b62343efd11b" class="bulleted-list"><li style="list-style-type:disc">第一阶段（2022年6月1日—2022年8月20日，近3个月）：<ul id="be323274-d48c-4d06-8828-6888931353d9" class="bulleted-list"><li style="list-style-type:circle">参赛者需要提交验证集结果，排行榜按验证集成绩排序</li></ul><ul id="91e4c5fc-454b-43ba-a763-b307268d4295" class="bulleted-list"><li style="list-style-type:circle">参赛者每周可提交3次模型，排行榜每天更新</li></ul><ul id="8c462541-0ab3-4d2c-a70d-a5dfc3386859" class="bulleted-list"><li style="list-style-type:circle">此阶段可以不提交模型</li></ul></li></ul><ul id="025dc304-6977-4831-9be1-e65663420cee" class="bulleted-list"><li style="list-style-type:disc">第二阶段（2022年8月20日—2022年9月20日，约1个月）：<ul id="6b758e44-0aa0-45e7-bccb-d2957a9e8ce9" class="bulleted-list"><li style="list-style-type:circle">此阶段开始的同时，报名截止</li></ul><ul id="8f9815e4-1856-4724-bebf-92ff7d12a65e" class="bulleted-list"><li style="list-style-type:circle">发布验证集的答案以及不带答案的测试集</li></ul><ul id="bc4b0a12-916c-4b36-9795-5f1f36f3d016" class="bulleted-list"><li style="list-style-type:circle">参赛者需要提交测试集结果，排行榜按测试集成绩排序</li></ul><ul id="c9c53497-b24e-4aba-9fca-2270b6df866a" class="bulleted-list"><li style="list-style-type:circle">参赛者每周可提交3次模型，排行榜每天更新</li></ul><ul id="76eac99e-b6b0-4acf-a9d4-08a79031f163" class="bulleted-list"><li style="list-style-type:circle">此阶段不提交模型视为弃权</li></ul></li></ul><ul id="a35ed6c3-3dfd-4388-9e04-729fcc3d82f4" class="bulleted-list"><li style="list-style-type:disc">第三阶段（2022年9月20日—2022年9月25日，共5天）：<ul id="46e11bc1-1f3d-4fc8-8368-635568e52371" class="bulleted-list"><li style="list-style-type:circle">参赛者选择1个模型作为最终参赛模型提交</li></ul><ul id="5f4e62b9-aad3-46f4-800a-ada1a785b28a" class="bulleted-list"><li style="list-style-type:circle">此阶段不提交模型视为弃权</li></ul></li></ul><ul id="de2a32b3-4974-4d2b-a450-22447f343d71" class="bulleted-list"><li style="list-style-type:disc">总结回顾阶段（2022年10月1日—2022年10月16日）<ul id="2e1b697d-0243-4271-91ab-472f8fff2078" class="bulleted-list"><li style="list-style-type:circle">公布结果并邀请优秀评测单位撰写技术报告（2022年10月1日）</li></ul><ul id="6c7a78bb-60e2-41b5-89a6-8dca7b318e0c" class="bulleted-list"><li style="list-style-type:circle">技术报告收取截止（2022年10月10日）</li></ul><ul id="0986377d-e380-4858-97c4-9f4cf38971dd" class="bulleted-list"><li style="list-style-type:circle">CCL 2022评测研讨会（2022年10月14日—2022年10月16日）</li></ul></li></ul><h3 id="2cc5394e-8aa3-4fa2-973c-537039798eec" class=""><strong>五、报名方式</strong></h3><p id="aca22f24-36d9-47d3-8574-2678c949959b" class="">报名方式将在评测发布时放出。</p><h3 id="84c9ef9b-1ae4-48e1-8f56-c8a021269879" class=""><strong>六、奖项设置</strong></h3><p id="5a96802e-8c25-423f-a697-aa14e30ef36a" class="">奖项设置将在评测正式发布时公布。</p><p id="6e414590-4dc6-4d31-a16b-929424a9fe3f" class="">
+</p><h3 id="3a65517a-f1cb-48a9-bd2a-77a6507b1828" class="">七、评测委员会</h3><p id="a577adfd-5a02-4b3d-9438-ca63e36cc1a7" class="">单位：北京大学，复旦大学</p><p id="7d707fd9-d19f-4453-b69a-268ac9f280ba" class="">主席：穗志方，詹卫东，常宝宝，李素建，魏忠钰</p><p id="789ee88a-f0ab-43f3-9967-069088e04792" class="">成员：董青秀，秦梓巍，夏鹤明 等</p><p id="ec557727-b3f6-4873-b554-06fc1631714f" class="">
+</p><h3 id="af517dca-381d-434a-adfc-1bf0807be655" class="">附录</h3><ul id="feef03b8-7634-4ee6-a3eb-43bd6c73703a" class="bulleted-list"><li style="list-style-type:disc">评测排行榜，baseline方法结果展示网站： <a href="https://2030nlp.github.io/PMR/index.html">https://2030nlp.github.io/PMR/index.html</a></li></ul><ul id="a203a7c0-3622-4c97-abda-23b47e4c58db" class="bulleted-list"><li style="list-style-type:disc">评测数据集构建流程：如下图所示，我们采用了多阶段的众包标注和检查流程，确保数据集质量。</li></ul><figure id="35bb2979-7349-4ba5-b2e0-83841daa8f0e" class="image"><a href="src/workflow.png"><img style="width:1260px" src="src/workflow.png"/></a></figure><p id="6a891741-6225-419d-b60a-6cc2e943045a" class="">
+</p><figure id="bfbcda87-d704-4c89-8224-a85a3f59ce5c" class="link-to-page"><a href="src/agreement.html">参赛协议</a></figure></div></article></body></html>

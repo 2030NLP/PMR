@@ -1,0 +1,675 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>参赛协议</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="bfbcda87-d704-4c89-8224-a85a3f59ce5c" class="page sans"><header><h1 class="page-title">参赛协议</h1></header><div class="page-body"><h1 id="1ae262d8-2812-4226-976a-415a64fa1c67" class="">参赛协议</h1><p id="0e1508b9-46ba-471e-8cb8-41e02dfa3fc1" class="">您在（以下简称“选手”）自愿报名参加CCL2022基于前提的跨模态推理评测（简称“比赛”）并点击报名页面的提交按钮之前，请务必仔细阅读并充分理解《CCL2022基于前提的跨模态推理评测选手参赛协议》（简称“本协议”）的内容，特别是以粗体标注的条款。</p><p id="5daa3c60-74c7-4dde-b755-ef5caeef12a4" class=""><strong>如果选手不同意本协议的任何内容，或者无法准确理解某项条款，请不要点击报名页面的提交按钮</strong>。举办方接受任何疑问咨询、建议，并将解释本协议内容，通讯方式已公布于本次比赛的官方网站。</p><p id="2fd57b7f-3303-4b3a-b46b-c4c221007a3b" class="">选手应知晓，报名成功代表选手已接受并签署了本协议的全部条款和内容，同意受到本协议约束。届时选手不应以未阅读本协议的内容或者未获得举办方对选手问询的解答等理由，主张本协议无效，或要求撤销、解除、终止本协议。</p><p id="3ac9ec5e-51d9-49fd-8ab0-8a1e04fb3eb2" class="">比赛各方本着自愿、平等、公平的原则，就选手参加比赛的相关事宜，达成如下参赛协议（简称“本协议”）：</p><h2 id="25464bee-a044-4abe-8132-579e36379376" class="">CCL2022基于前提的跨模态推理评测选手参赛协议</h2><h3 id="c2e61b6b-82c3-41cd-9a72-d82580c8b4c0" class="">第一条 选手的声明和保证</h3><p id="f394f900-c973-4456-ad61-f855bb4c59ce" class="">选手向举办方作出如下声明和保证：</p><ol type="1" id="870e98ab-b5f8-43d6-bf97-fc273b75f441" class="numbered-list" start="1"><li>选手将阅读并按照比赛规则填写选手报名资料并保证所填写的报名信息均是真实、有效、合法的。选手保证其有资格和/或具备相关得资质以参加比赛。选手知晓并同意比赛举办方保留委托第三方机构调查选手资质的权利。如选手的有关信息被查出或客观证明存在失实问题或/和违法等，选手同意接受举办方随时取消、中止或终止其参赛资格。举办方保留追究选手法律责任的权利，因此对举办方及比赛带来的任何损失，选手保证承担全部赔偿责任。</li></ol><ol type="1" id="8c0130ac-1d7a-4c74-a0ce-84e7666daedd" class="numbered-list" start="2"><li>选手保证按照比赛的日程、时间表和规则参加比赛，赛程中不得无故退出，否则举办方有权取消、中止或终止其参赛资格；如选手无合理理由退出比赛或做出有损比赛或举办方的行为，举办方将保留追究选手法律责任的权利。</li></ol><ol type="1" id="767dc3be-5b83-4315-81f1-bf8a319e22cb" class="numbered-list" start="3"><li>选手保证其参赛提交的参赛资料、源代码或论文等任何信息或文件都是合法的、有效的和完整的，且不侵犯任何第三方的权利。选手同意并允许举办方获取和收集选手提交的参赛作品（包括提交的源代码等），选手同意，举办方有权使用上述参赛作品，包括用于筛选比赛的选手入围、晋级、获奖、商业合作与开发、比赛宣传推广、人才统计与推荐及与比赛相关的其他事宜。</li></ol><ol type="1" id="c2eec81c-0fd4-4510-ae9f-b134097fb573" class="numbered-list" start="4"><li>选手同意在报名和参加比赛过程中服从举办方的安排和管理，如有违反，选手将承担举办方取消其参赛资格的后果并承担由此造成的损失。</li></ol><ol type="1" id="59548cbd-750e-424d-ba5a-7e71efae7b5b" class="numbered-list" start="5"><li>选手已仔细、认真、审慎阅读比赛相关的各项规则、制度和声明并同意遵守；选手将尊重并接受比赛评委会做出的评判、比赛举办方做出的决定等。</li></ol><h3 id="eac3a436-f56f-4ae0-91ef-0ffecc6e34c3" class="">第二条 保密义务</h3><p id="1aa64523-9fd9-4f7d-98c3-5f81d4442efb" class="">选手同意遵守如下保密规则：</p><ol type="1" id="1bad89a5-f76e-428c-b497-46bb558b7f6c" class="numbered-list" start="1"><li>选手承诺对举办方及其关联方、合作方的保密信息严格保密，保密信息是指举办方在比赛全过程中向选手披露或提供的全部信息，以及选手因参加本次比赛从举办方或其关联方、合作方处获得的商业秘密和其他所有非公开的信息，包括但不限于：
+（1） 举办方及其关联方、合作方的用户信息、技术资料、算法、源代码，以及方案、软件、程序、手册等；
+（2） 举办方及其关联方、合作方从第三方处获得但应承担保密义务的数据、信息；
+（3） 任何其他机密或专有数据、信息；
+（4） 其他通常不为举办方及其关联方以外的人所知晓、未在公共领域被正式公开的数据、信息；
+（5） 本协议虽未列明但依谨慎使用原则可以确定需要承担保密义务的数据、信息。
+选手认可上述所有信息为举办方及其关联方、合作方的保密信息，且该等信息对于举办方及其关联方、合作方具有重要作用，如有泄露或不当利用将造成严重影响和经济损失。</li></ol><ol type="1" id="fea50981-0ea5-4d3e-90d5-749b60564ffc" class="numbered-list" start="2"><li>保密信息不包括：（1）非因选手违反本协议而为公众普遍知晓的信息；（2）选手在从举办方接到该等信息以前，已为选手拥有，或已知但选手无保密义务的信息。</li></ol><ol type="1" id="10f06714-3e6a-4c36-ba74-6711e7bf6866" class="numbered-list" start="3"><li>保密期限：选手对于上述保密信息的保密义务于举办方提供保密信息之日或选手获得该等保密信息之日起至该等保密信息公开为止。</li></ol><ol type="1" id="68655aaa-49de-4967-9271-b7c524b587ec" class="numbered-list" start="4"><li>保密信息的合理使用：选手保证将按照举办方要求或保密信息使用规则在指定区域、平台和时间范围内使用上述保密信息，未经举办方事先书面同意，选手不得以不符合举办方要求的方式获取、使用保密信息，不得对举办方保密信息进行效仿、逆向工程、反编译、试图破译源代码等，也不得以任何形式向任何第三方泄露、传播、转让、出售或用于任何商业用途等。选手将为其使用保密信息的行为负责。</li></ol><h3 id="04e1c449-bd07-4413-a496-0f9daef003b0" class="">第三条 数据集的下载与使用</h3><ol type="1" id="20de69aa-4e58-4826-98a1-7445a0189a27" class="numbered-list" start="1"><li><strong>数据集归大赛举办方（北京大学计算语言学研究所）所有。除本次CCL2022基于前提的跨模态推理评测（以下简称“比赛”）之外，选手及其他研究人员可以将本次评测的数据用于自然语言处理相关学术研究，使用时请在论文或其他相关资料中引用举办方的论文(</strong><a href="https://aclanthology.org/2022.acl-long.66/">https://aclanthology.org/2022.acl-long.66/</a><strong>)。</strong></li></ol><ol type="1" id="c58b469e-3d8f-4752-aa80-28a976e61a85" class="numbered-list" start="2"><li><strong>本比赛所使用的数据集仅限于在学术研究和教学活动中免费使用，不得用于任何商业目的。</strong></li></ol><ol type="1" id="696c794c-31cc-4920-97ff-3f36d784b68b" class="numbered-list" start="3"><li>举办方不承担因数据集使用造成的任何形式的损失或伤害，不对任何因使用比赛数据产生的法律后果承担任何责任。</li></ol><ol type="1" id="17272b3a-e1eb-45db-9abd-1597d768fe5d" class="numbered-list" start="4"><li>与选手使用数据集有关的任何法律责任均由选手承担，如选手使用数据集的行为涉及侵犯隐私权，对举办方、合作方及关联方造成商誉或经济损失，选手应当承担赔偿责任。</li></ol><ol type="1" id="f8802068-8bb1-4ee0-a89e-a3f626e7c612" class="numbered-list" start="5"><li>如果选手受雇于以盈利为目的的商业主体，应确保使用数据集的目的为仅用于比赛，且其雇主同样受本协议约束，选手确认其签订本协议前已经取得雇主的充分授权。</li></ol><ol type="1" id="27829cb2-c42b-44b0-a498-fe9eaf6a9aa4" class="numbered-list" start="6"><li>举办方享有随时取消或撤回授权选手使用数据集的权利，并有权要求选手删除已下载数据集。</li></ol><ol type="1" id="71ac26c8-8fb8-48f6-996c-fe8e2ddd8499" class="numbered-list" start="7"><li><strong>请查阅并理解：CCL2022基于前提的跨模态推理评测数据集使用许可</strong>（ <a href="https://github.com/2030NLP/SpaCE2021/blob/main/data/LICENSE.md">https://github.com/2030NLP/SpaCE2021/blob/main/data/LICENSE.md</a> ）。</li></ol><h3 id="7a3983e4-ed22-43b6-b5df-6d3c758cf286" class="">第四条 知识产权</h3><ol type="1" id="130158fa-2b84-4e62-b5b9-c6a8f6b5c30a" class="numbered-list" start="1"><li>除数据集下载条款另有约定外，举办方及其关联方对其在本次比赛中所提供的所有信息（包括但不限于图片、视频、数据、代码等）享有合法所有权，选手对此不享有任何权利。未经举办方或其关联方同意，选手不得任意使用、修改、复制、公开传播、发行或以其他任何方式利用前述信息。</li></ol><ol type="1" id="25ce4007-7439-4433-b5dd-657bb9734519" class="numbered-list" start="2"><li>选手应保证其在参加本次比赛中所提供、使用的数据、源代码等及参加比赛所获得的成果未侵犯任何第三方的合法权益且不违反任何法律法规的规定，如第三方基于此等成果向举办方及/或其关联方提出索赔、诉讼等的，选手应赔偿举办方及其关联方由此受到的全部损失，举办方有权终止选手的参赛资格并采取其他有效措施。</li></ol><ol type="1" id="a8edde2b-f81e-4e7f-a30a-0ccc9a27c4ba" class="numbered-list" start="3"><li><strong>除举办方与选手另有约定外，比赛中选手开发的成果（包括但不限于算法、源代码、数据、设计方案等，以下简称“成果”）及相应的知识产权，归选手所有；但比赛中产生该等成果所依附或使用的图片、视频、数据等（以下简称“基础数据”），如由举办方及其关联方、合作方提供，则此等基础数据的知识产权由举办方所有，且该等基础数据的所有权并不因提供行为发生转移。</strong></li></ol><ol type="1" id="39e50ccd-7d6a-4c52-8ce2-42830f40db8d" class="numbered-list" start="4"><li>除非举办方和选手另有约定，选手保证其仅为比赛目的使用基础数据，并对基础数据的使用行为自行承担全部责任，并保证举办方、及其关联方、合作方免受任何因其使用基础数据导致的索赔或诉讼。</li></ol><ol type="1" id="dc8f8bba-081e-4d89-a326-e297cec62c3e" class="numbered-list" start="5"><li>本协议的终止不影响本条知识产权条款继续有效。</li></ol><h3 id="31b620e8-e8bf-4f96-bc9e-15e70b56657a" class="">第五条 违约条款</h3><ol type="1" id="db985fb6-731a-4560-aa11-1aec6000f443" class="numbered-list" start="1"><li>违反本协议约定的一方，应当赔偿守约方因此受到的全部损失。</li></ol><ol type="1" id="a8484e7c-1654-49be-961a-5cb2ef97ffa4" class="numbered-list" start="2"><li>如保密信息非因选手原因而未经授权被使用或泄露的，选手在知晓后应立即通知举办方，举办方将积极通过各种手段收回保密信息，缩小保密信息泄露范围，制止选手相关权益被进一步侵害。</li></ol><ol type="1" id="fdfbc552-7317-43b7-90cb-7ed293fefea6" class="numbered-list" start="3"><li>选手同意，未经举办方或其关联方、合作方授权的保密信息的使用或披露，都将给举办方及其关联方、合作方造成难以估计的损失和侵害。除法律规定的赔偿外，举办方将有权基于客观事实而对任何实际或推断可能发生的违反本协议的相关行为，向有管辖权的人民法院申请禁止令或适当的救济。选手应就其违约行为而对举办方及其关联方、合作方可能受到的全部损失和侵害，包括但不限于实际损失、可得利益和律师费用，承担赔偿责任。</li></ol><ol type="1" id="01e1711a-0c20-4a20-95e2-756af62b2dba" class="numbered-list" start="4"><li>选手同意举办方有权随时对选手是否存在违约进行审查；如果选手有任何违反本协议的行为，举办有权立即终止选手的参赛资格，由此产生的一切损失及后果均由选手承担。</li></ol><h3 id="5496caa3-e368-40c3-b72c-0c5c913a4891" class="">第六条 奖金条款</h3><ol type="1" id="de1b6d68-b439-4e25-90b2-bd74ccc7b721" class="numbered-list" start="1"><li>请提供中国大陆地区银行账户，以便不影响奖金及时接收。</li></ol><ol type="1" id="c82d8144-727c-497b-a88e-d32fbd9fdc2c" class="numbered-list" start="2"><li><strong>比赛举办方将向获奖选手发放人民币奖金。比赛列明的奖金为税前金额，大陆地区获奖选手可获得的税后奖金为按照相关税务法规规定代扣代缴个人所得税后的金额；大陆地区之外的获奖选手付汇时需要选手先行缴纳税款。</strong></li></ol><h3 id="5b5c31f6-e4b2-4f31-968a-07539826d069" class="">第七条 其他条款</h3><ol type="1" id="d8d55ce9-141a-4c14-9db4-2129b3da578f" class="numbered-list" start="1"><li>本协议自选手报名之日起生效。本协议之效力、解释、变更、执行与争议解决均适用中华人民共和国法律。选手除遵守本协议外，使用本网站相关服务时还应遵守本次比赛的其他规则和条款。</li></ol><ol type="1" id="eb1b891e-2139-40f8-ba3c-f0520b2a55c7" class="numbered-list" start="2"><li>凡因本协议引起的或与本协议有关的任何争议，均应提交中国国际经济贸易仲裁委员会，按照申请仲裁时该会现行有效的仲裁规则，并适用中华人民共和国法律解决进行仲裁。仲裁语言应为中文。</li></ol><ol type="1" id="2cd37540-be7e-464b-a2b0-73d3c17d4804" class="numbered-list" start="3"><li><strong>选手点击报名提交按钮即视为认同比赛所有的规则、制度和声明。</strong></li></ol><ol type="1" id="dda95774-622e-4520-9ab4-3463fa9fad92" class="numbered-list" start="4"><li>选手应知晓并同意，举办方未及时行使权利并不代表放弃此等权利或与之相关的权利。单独或部分行使权利并不妨碍举办方今后进一步行使权利或获得补偿，或采取其他方式行使权利或获得补偿。</li></ol><ol type="1" id="927c9031-4e9d-40e5-9c76-22e0134eb1d6" class="numbered-list" start="5"><li>选手理解并同意即使其满足所有申请要求，举办方并没有必须选择其参加比赛的义务。</li></ol><ol type="1" id="32fc954b-2b5c-4d68-bcf7-5fa57ca7831c" class="numbered-list" start="6"><li>如果本协议中任何条款与现行法律相抵触，则此条款无效，但不影响本协议中其他条款的效力。</li></ol><ol type="1" id="2ea53916-b375-4d8b-a8f2-a61a94da5854" class="numbered-list" start="7"><li>本协议的最终解释权归属于比赛举办方。</li></ol></div></article></body></html>

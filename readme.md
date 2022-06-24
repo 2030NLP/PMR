@@ -161,7 +161,7 @@ Here is a brief introduction to the data format.
 ```
 ## Baseline Models
 We provide baseline models here. They are adapted from three vision-language pretrained models which have great performance on multimodal understanding tasks.
-1. [VL-BERT](https://github.com/jackroos/VL-BERT)
+1. [PMR-baseline-VL-BERT](https://github.com/ELFEamp/PMR-baseline-VL-BERT) ([source repo](https://github.com/jackroos/VL-BERT/))
 2. [UNITER](https://github.com/ChenRocks/UNITER)
 3. [ERINIE](https://github.com/paddlepaddle/ernie/tree/repro/ernie-vil)
 ## Citation

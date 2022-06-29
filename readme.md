@@ -110,7 +110,7 @@ Through manually annotation and adversarial generation, we create PMR dataset wi
 ## Dataset Access
 Dataset can be downloaded at [Google Drive](https://drive.google.com/drive/folders/15IZny7KKz4RRwd9c9D1ob3Bi3orsqQMe?usp=sharing).
 
-PMR has been selected as one of the evalution tasks on CCL2022, and we provide full train and validation sets(both original and adversarial samples) to train models. For model evalution, you can submit the predictions of model on test set(`test-ori-without-label.jsonl`) by mailing at corlder@outlook.com, and we will give feedback timely.
+PMR has been selected as one of the evalution tasks on CCL2022, and we provide full train and validation sets(both original and adversarial samples) to train models. For model evalution, you can submit the predictions of model on test set(`test-ori-without-label.jsonl`) by mailing at ccl2022_pmr@163.com, and we will give feedback timely.
 
 ### Data Format
 Here is a brief introduction to the data format.
